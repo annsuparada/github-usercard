@@ -65,8 +65,8 @@ axios.get(`https://api.github.com/users/annsuparada`)
  .then(data => {
    console.log(`It's work`, data)
    const cards = document.querySelector('.cards')
-   const card = createGitCard(data.data) 
-   cards.appendChild(createGitCard(data))
+  //  const card = createGitCard(data.data) 
+  //  cards.appendChild(createGitCard(data))
 
  })
  .catch(error => {
@@ -75,6 +75,44 @@ axios.get(`https://api.github.com/users/annsuparada`)
 
 
 function createGitCard() {
+  // create the elements
+  const card = document.createElement('div')
   const img = document.createElement('img')
   const cardInfo = document.createElement('div')
+  const name = document.createElement('h3')
+  const username = document.createElement('p')
+  const location = document.createElement('p')
+  const profile = document.createElement('p')
+  const followers = document.createElement('p')
+  const followings = document.createElement('p')
+  const bio = document.createElement('p')
+
+  // set the styles
+  card.classList.add('card')
+  cardInfo.classList.add('card-info')
+  name.classList.add('name')
+  username.classList.add('username')
+
+
+  // set the content
+  img.src = imageUrl
+  name.textContent = `User name: `
+  username.textContent = `Username: `
+  location.textContent = `Location: `
+  profile.textContent = `Profile: `
+  followers.textContent = `Followers: `
+  followings.textContent = `Followings: `
+  bio.textContent = `Bio: `
+
+  // put together
+  card.appendChild(img)
+  card.appendChild(name)
+  card.appendChild(username)
+  card.appendChild(location)
+  card.appendChild(profile)
+  card.appendChild(followers)
+  card.appendChild(followings)
+  card.appendChild(bio)
+
+  return card
 }
