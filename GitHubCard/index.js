@@ -127,7 +127,7 @@ function createGitCard(data) {
   profileA.textContent = data.html_url
   profileA.href = data.html_url
   followers.textContent = `Followers: ${data.followers}`
-  followings.textContent = `Followings: ${data.followings}`
+  followings.textContent = `Followings: ${data.following}`
   bio.textContent = `Bio: ${data.bio}`
 
   // put together
