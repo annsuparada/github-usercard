@@ -24,7 +24,12 @@
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ['tetondan',
+  'dustinmyers',
+  'justsml',
+  'luishrd',
+  'bigknell',];
+  // console.log(followersArray)
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -53,3 +58,23 @@ const followersArray = [];
   luishrd
   bigknell
 */
+
+
+
+axios.get(`https://api.github.com/users/annsuparada`)
+ .then(data => {
+   console.log(`It's work`, data)
+   const cards = document.querySelector('.cards')
+   const card = createGitCard(data.data) 
+   cards.appendChild(createGitCard(data))
+
+ })
+ .catch(error => {
+   console.log('The GitHub card API is currently down, try again later', error)
+ })
+
+
+function createGitCard() {
+  const img = document.createElement('img')
+  const cardInfo = document.createElement('div')
+}
