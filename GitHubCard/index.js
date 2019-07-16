@@ -24,7 +24,7 @@
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -53,3 +53,94 @@ const followersArray = [];
   luishrd
   bigknell
 */
+
+
+
+
+const cards = document.querySelector('.cards')
+
+
+
+axios.get(`https://api.github.com/users/annsuparada`)
+ .then(response => {
+  console.log(`It's work`, response)
+  
+  const element = createGitCard(response.data)
+  cards.appendChild(element)
+ 
+  })
+  
+ .catch(error => {
+   console.log('The GitHub card API is currently down, try again later', error)
+ })
+
+ const followersArray = ['tetondan',
+ 'dustinmyers',
+ 'justsml',
+ 'luishrd',
+ 'bigknell',];
+
+followersArray.forEach(item => {
+
+  axios.get(`https://api.github.com/users/${item}`)
+   .then(response => {
+    console.log(`It's work`, response)
+    
+    const element = createGitCard(response.data)
+    cards.appendChild(element)
+   
+    })
+    
+   .catch(error => {
+     console.log('The GitHub card API is currently down, try again later', error)
+   })
+})
+
+
+function createGitCard(data) {
+  // create the elements
+  const card = document.createElement('div')
+  const img = document.createElement('img')
+  const cardInfo = document.createElement('div')
+  const name = document.createElement('h3')
+  const username = document.createElement('p')
+  const location = document.createElement('p')
+  const profile = document.createElement('p')
+  const followers = document.createElement('p')
+  const followings = document.createElement('p')
+  const bio = document.createElement('p')
+  const profileA = document.createElement('a')
+
+  // set the styles
+  card.classList.add('card')
+  cardInfo.classList.add('card-info')
+  name.classList.add('name')
+  username.classList.add('username')
+
+
+  // set the content
+  img.src = data.avatar_url
+  name.textContent = data.name
+  username.textContent = data.login
+  location.textContent = `Location: ${data.location}`
+  profile.textContent = `Profile: `
+  profileA.textContent = data.html_url
+  profileA.href = data.html_url
+  followers.textContent = `Followers: ${data.followers}`
+  followings.textContent = `Followings: ${data.following}`
+  bio.textContent = `Bio: ${data.bio}`
+
+  // put together
+  card.appendChild(img)
+  card.appendChild(cardInfo)
+  cardInfo.appendChild(name)
+  cardInfo.appendChild(username)
+  cardInfo.appendChild(location)
+  cardInfo.appendChild(profile)
+  cardInfo.appendChild(followers)
+  cardInfo.appendChild(followings)
+  cardInfo.appendChild(bio)
+  profile.appendChild(profileA)
+
+  return card
+}
